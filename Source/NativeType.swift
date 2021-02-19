@@ -8,6 +8,20 @@
     import CHDF5
 #endif
 
+protocol NumericType {}
+extension Int:NumericType{}
+extension UInt:NumericType{}
+extension Float:NumericType{}
+extension Double:NumericType{}
+extension Int8:NumericType{}
+extension UInt8:NumericType{}
+extension Int16:NumericType{}
+extension UInt16:NumericType{}
+extension Int32:NumericType{}
+extension UInt32:NumericType{}
+extension Int64:NumericType{}
+extension UInt64:NumericType{}
+
 public enum NativeType {
     case int
     case uint
