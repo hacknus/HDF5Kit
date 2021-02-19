@@ -8,8 +8,8 @@
 #if SWIFT_PACKAGE
     import CHDF5
 #endif
-
-public class NumericDataset<T:NumericType>: Dataset {
+public protocol NativeDataset {}
+public class NumericDataset<T:NumericType>: Dataset, NativeDataset {
     public subscript(slices: HyperslabIndexType...) -> [T] {
         // There is a problem with Swift where it gives a compiler error if `set` is implemented here
         return (try? read(slices)) ?? []
@@ -68,7 +68,7 @@ public class NumericDataset<T:NumericType>: Dataset {
             size = space.selectionSize
         }
 
-        var result = [T](repeating: 0.0, count: size)
+        var result = [T](repeating: 0 as! T , count: size)
         try result.withUnsafeMutableBufferPointer() { (pointer: inout UnsafeMutableBufferPointer) in
             try read(into: pointer.baseAddress!, memSpace: memSpace, fileSpace: fileSpace)
         }
@@ -114,7 +114,7 @@ public class NumericDataset<T:NumericType>: Dataset {
 
 extension GroupType {
     /// Create a TDataset
-    public func createNumericDataset(_ name: String, dataspace: Dataspace, type:NumericType) -> NumericDataset? {
+    public func createNumericDataset<T:NumericType>(_ name: String, dataspace: Dataspace, type:T.Type) -> NumericDataset<T>? {
         guard let datatype = Datatype(type: type.self) else {
             return nil
         }
@@ -125,7 +125,7 @@ extension GroupType {
     }
 
     /// Create a chunked NumericDataset
-    public func createNumericDataset<T:NumericType>(_ name: String, dataspace: Dataspace, chunkDimensions: [Int], type:T.type) -> NumericDataset<T>? {
+    public func createNumericDataset<T:NumericType>(_ name: String, dataspace: Dataspace, chunkDimensions: [Int], type:T.Type) -> NumericDataset<T>? {
         guard let datatype = Datatype(type: type.self) else {
             return nil
         }
@@ -148,15 +148,15 @@ extension GroupType {
     }
 
     /// Create a Numeric Dataset and write data
-    public func createAndWriteDataset<T:NumericType>(_ name: String, dims: [Int], data: [T]) throws -> NumericDataset<T> {
+    public func createAndWriteDataset<T:NumericType>(_ name: String, dims: [Int], data: [T], type:T.Type) throws -> NumericDataset<T> {
         let space = Dataspace.init(dims: dims)
-        let set = createNumericDataset(name, dataspace: space, type:T)!
+        let set = createNumericDataset(name, dataspace: space, type:type)!
         try set.write(data)
         return set
     }
 
     /// Open an existing NumericDataset
-    public func openNumericDataset<T:NumericType>(_ name: String, type:T.type) -> NumericDataset<T>? {
+    public func openNumericDataset<T:NumericType>(_ name: String, type:T.Type) -> NumericDataset<T>? {
         let datasetID = name.withCString{ name in
             return H5Dopen2(id, name, 0)
         }

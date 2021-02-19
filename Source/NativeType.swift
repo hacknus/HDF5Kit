@@ -8,7 +8,7 @@
     import CHDF5
 #endif
 
-protocol NumericType {}
+public protocol NumericType {}
 extension Int:NumericType{}
 extension UInt:NumericType{}
 extension Float:NumericType{}
