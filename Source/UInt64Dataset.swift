@@ -132,6 +132,8 @@ extension GroupType {
         precondition(dataspace.dims.count == chunkDimensions.count)
 
         let plist = H5Pcreate(H5P_CLS_DATASET_CREATE_ID_g)
+        let compLevel:UInt32 = 6
+        H5Pset_deflate(plist, compLevel)
         H5Pset_char_encoding(plist, H5T_CSET_UTF8)
         let chunkDimensions64 = chunkDimensions.map({ hsize_t(bitPattern: hssize_t($0)) })
         chunkDimensions64.withUnsafeBufferPointer { (pointer) -> Void in
