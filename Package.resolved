@@ -3,7 +3,7 @@
     "pins": [
       {
         "package": "CHDF5",
-        "repositoryURL": "https://github.com/aleph7/CHDF5.git",
+        "repositoryURL": "https://github.com/Jeff-AB/CHDF5.git",
         "state": {
           "branch": null,
           "revision": "7cc74342b0bbaa784e310ddf4248c841c78e8354",
