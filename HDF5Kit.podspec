@@ -2,7 +2,7 @@ version = `git describe --long --tags | cut -f 1 -d '-'`.chomp
 
 Pod::Spec.new do |s|
   s.name         = 'HDF5Kit'
-  s.version      = '0.4.0'
+  s.version      = version
   s.summary      = 'Swift wrapper for HDF5'
   s.homepage     = 'https://github.com/Jeff-AB/HDF5Kit'
   s.license      = 'MIT'
@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   #s.tvos.deployment_target = '9.0'
   s.swift_version = '4.0'
 
-  s.source        = { git: 'https://github.com/Jeff-AB/HDF5Kit.git', tag: 0.4.0}
+  s.source        = { git: 'https://github.com/Jeff-AB/HDF5Kit.git', tag: version}
   s.source_files  = 'Source', 'dist/src/*.{c,h}',
   s.exclude_files = 'dist/src/H5detect.c'
 
