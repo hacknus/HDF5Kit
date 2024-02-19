@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.author       = { 'Alejandro Isaza' => 'al@isaza.ca' }
 
   s.osx.deployment_target = '10.10'
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '14.5'
   #s.tvos.deployment_target = '9.0'
   s.swift_version = '4.0'
 
