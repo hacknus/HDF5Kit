@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   #s.tvos.deployment_target = '9.0'
   s.swift_version = '4.0'
 
-  s.source        = { git: 'https://github.com/Jeff-AB/HDF5Kit.git', tag: version }
+  s.source        = { git: 'https://github.com/Jeff-AB/HDF5Kit.git', tag: master }
   s.source_files  = 'Source', 'dist/src/*.{c,h}',
   s.exclude_files = 'dist/src/H5detect.c'
 
