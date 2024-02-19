@@ -5,6 +5,7 @@
 // file LICENSE at the root of the source code distribution tree.
 
 import HDF5Kit
+import Foundation
 
 func tempFilePath() -> String {
     let fileName = ProcessInfo.processInfo.globallyUniqueString + ".hdf"

@@ -1,16 +1,14 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "CHDF5",
-        "repositoryURL": "https://github.com/Jeff-AB/CHDF5.git",
-        "state": {
-          "branch": null,
-          "revision": "7cc74342b0bbaa784e310ddf4248c841c78e8354",
-          "version": "1.0.1"
-        }
+  "pins" : [
+    {
+      "identity" : "chdf5",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Jeff-AB/CHDF5.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "e5b52555de5bae76e9203e36013ddf72dac60a19"
       }
-    ]
-  },
-  "version": 1
+    }
+  ],
+  "version" : 2
 }
