@@ -94,3 +94,41 @@ public class File: GroupType {
         return Object(id: oid)
     }
 }
+
+extension File {
+    public func getGroupNames() -> [String]? {
+        var groupNames: [String] = []
+
+        // Open the root group "/"
+        guard let rootGroup = self.openGroup("/") else {
+            return nil
+        }
+
+        // Get the number of objects in the root group
+        var numObjects: hsize_t = 0
+        let status = H5Gget_num_objs(rootGroup.id, &numObjects)
+        
+        // Check if the status is valid (should be >= 0)
+        guard status >= 0 else {
+            return nil
+        }
+
+        // Iterate through all the objects in the root group
+        for idx in 0..<numObjects {
+            // Get the name of the object at index idx
+            var nameBuffer = [CChar](repeating: 0, count: 255)
+            let status = H5Gget_objname_by_idx(rootGroup.id, idx, &nameBuffer, 255)
+
+            if status >= 0 {
+                let objectName = String(cString: nameBuffer)
+
+                // Open the object as a group and check if it is a group
+                if let _ = self.openGroup(objectName) {
+                    groupNames.append(objectName)
+                }
+            }
+        }
+
+        return groupNames.isEmpty ? nil : groupNames
+    }
+}
