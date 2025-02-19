@@ -16,11 +16,13 @@ let package = Package(
     targets: [
         .target(
             name: "HDF5Kit",
-            path: "Source"),
+            dependencies: ["CHDF5"], // <-- Link CHDF5 explicitly
+            path: "Source"
+        ),
         .testTarget(
             name: "HDF5KitTests",
-            dependencies: ["HDF5Kit"]),
-    ]
-    ,
+            dependencies: ["HDF5Kit"]
+        ),
+    ],
     swiftLanguageVersions: [.v4, .v5]
 )
