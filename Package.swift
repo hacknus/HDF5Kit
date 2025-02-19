@@ -11,7 +11,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/Jeff-AB/CHDF5.git", branch: "master"),
+        .package(url: "https://github.com/hacknus/CHDF5.git", branch: "master"),
     ],
     targets: [
         .target(
